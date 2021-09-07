@@ -1,90 +1,50 @@
 package com.jsr.crud.saladr.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import java.sql.Time;
+import java.util.Calendar;
 import java.util.Date;
 
 
-
 @Entity
-@Table(name = "meetingroom")
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Room {
-
-    private long id;
-    private String name;
-    private Date date;
-    private Date startHour;
-    private  Date endHour;
-
-    public Room(){
-
-
-    }
-
-    public Room(long id, String name, Date date, Date startHour, Date endHour) {
-        this.id = id;
-        this.name = name;
-        this.date = date;
-        this.startHour = startHour;
-        this.endHour = endHour;
-    }
-
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public long getId() {
-        return id;
-    }
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-    public void setId(long id) {
-        this.id = id;
-    }
+    @Column(nullable = false)
+    private String name;
 
-    @Column(name = "name", nullable = false)
-    public String getName() {
-        return name;
-    }
+    @Column(nullable = false)
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private Calendar date;
 
-    @Column(name = "date", nullable = false)
-    public Date getDate() {
-        return date;
-    }
+    @Column(nullable = false)
+    private Time startHour;
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    @Column(name = "startHour", nullable = false)
-    public Date getStartHour() {
-        return startHour;
-    }
-
-    public void setStartHour(Date startHour) {
-        this.startHour = startHour;
-    }
-
-    @Column(name = "endHour", nullable = false)
-    public Date getEndHour() {
-        return endHour;
-    }
-
-    public void setEndHour(Date endHour) {
-        this.endHour = endHour;
-    }
+    @Column(nullable = false)
+    private Time endHour;
 
 
-@Override
-public String toString(){
-    return "Room [id="+id+",name="+name+",startHour="+startHour+",endHour="+endHour+" ]";
-}
+
+
+
 
 
 }
